@@ -1,0 +1,15 @@
+;; recursive
+(define (accumulate combiner null-value term a next b)
+  (define (rec a)
+    (if (> a b)
+        null-value
+        (combiner (term a) (rec (next a)))))
+  (rec a))
+
+;; iterative
+(define (accumulate combiner null-value term a next b)
+  (define (iter a value)
+    (if (> a b)
+        value
+        (iter (next a) (combiner (term a) value))))
+  (iter a null-value))
